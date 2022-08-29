@@ -24,7 +24,21 @@ app.get('/api/hello', function (req, res) {
   res.json({ greeting: 'hello API' });
 });
 
+app.get("/api/whoami", (req,res) => {
+  let headers = req.headers
+  let ip = req.get('x-forwarded-for');
+  let language = req.get('accept-language');
+  let agent = req.get('user-agent')
+  console.log(ip)
+  res.json({ipaddress: ip, language:language, software: agent})
+})
+
 // listen for requests :)
 var listener = app.listen(process.env.PORT || 3000, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
+
+
+//THINGS TO DO
+//first of all create the route
+//this exercise is a header parser, its similar to the previous but this time is just create the rute and extract the info from the header, for that I just have to use req.headers and then extract the neccesary info, first I'll going to console.log all the header and then ill select the neccesary header, I need IP, language, and software
